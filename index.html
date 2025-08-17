@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizMaster - Technical MCQ Quiz Application</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">🧠</div>
+                <span class="brand-text">QuizMaster</span>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="theme-icon theme-icon--light">☀️</span>
+                    <span class="theme-icon theme-icon--dark">🌙</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Animated Background -->
+    <div class="animated-bg" id="animatedBg">
+        <div class="gradient-orb gradient-orb--1"></div>
+        <div class="gradient-orb gradient-orb--2"></div>
+        <div class="gradient-orb gradient-orb--3"></div>
+    </div>
+
+    <!-- Subject Selection Page -->
+    <main class="page page--active" id="subjectSelection">
+        <div class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Master Technical Concepts</h1>
+                    <p class="hero-subtitle">Challenge yourself with comprehensive MCQ quizzes across core computer science domains</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">200+</span>
+                            <span class="stat-label">Questions</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Subjects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Difficulty Levels</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="subjects-section">
+            <div class="container">
+                <div class="subjects-grid">
+                    <div class="subject-card glass-card" data-subject="Computer Networks">
+                        <div class="subject-card__background"></div>
+                        <div class="subject-card__content">
+                            <div class="subject-card__icon">🌐</div>
+                            <h3 class="subject-card__title">Computer Networks</h3>
+                            <p class="subject-card__description">Network fundamentals, protocols, and cybersecurity basics</p>
+                            <div class="subject-card__stats">
+                                <div class="stat-pill">50 Questions</div>
+                                <div class="stat-pill">Up to 150 Points</div>
+                            </div>
+                            <div class="subject-card__glow"></div>
+                        </div>
+                    </div>
+
+                    <div class="subject-card glass-card" data-subject="Network Security">
+                        <div class="subject-card__background"></div>
+                        <div class="subject-card__content">
+                            <div class="subject-card__icon">🔒</div>
+                            <h3 class="subject-card__title">Network Security</h3>
+                            <p class="subject-card__description">Cybersecurity principles, threats, and protection mechanisms</p>
+                            <div class="subject-card__stats">
+                                <div class="stat-pill">50 Questions</div>
+                                <div class="stat-pill">Up to 150 Points</div>
+                            </div>
+                            <div class="subject-card__glow"></div>
+                        </div>
+                    </div>
+
+                    <div class="subject-card glass-card" data-subject="OOPs">
+                        <div class="subject-card__background"></div>
+                        <div class="subject-card__content">
+                            <div class="subject-card__icon">⚡</div>
+                            <h3 class="subject-card__title">Object-Oriented Programming</h3>
+                            <p class="subject-card__description">OOP concepts, design patterns, and secure coding practices</p>
+                            <div class="subject-card__stats">
+                                <div class="stat-pill">50 Questions</div>
+                                <div class="stat-pill">Up to 150 Points</div>
+                            </div>
+                            <div class="subject-card__glow"></div>
+                        </div>
+                    </div>
+
+                    <div class="subject-card glass-card" data-subject="DBMS">
+                        <div class="subject-card__background"></div>
+                        <div class="subject-card__content">
+                            <div class="subject-card__icon">🗄️</div>
+                            <h3 class="subject-card__title">Database Management</h3>
+                            <p class="subject-card__description">Database design, SQL, and data security fundamentals</p>
+                            <div class="subject-card__stats">
+                                <div class="stat-pill">50 Questions</div>
+                                <div class="stat-pill">Up to 150 Points</div>
+                            </div>
+                            <div class="subject-card__glow"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Instructions Page Template -->
+    <template id="instructionsTemplate">
+        <section class="page" id="instructionsPage">
+            <div class="container">
+                <div class="instructions-panel glass-card">
+                    <div class="panel-header">
+                        <button class="back-btn" id="backToSubjectsBtn" aria-label="Back to subjects">
+                            <span class="back-arrow">←</span>
+                        </button>
+                        <h2 class="panel-title">Quiz Instructions</h2>
+                    </div>
+                    
+                    <div class="instructions-content">
+                        <div class="selected-subject-info">
+                            <h3 id="selectedSubject"></h3>
+                            <div class="subject-icon" id="selectedSubjectIcon"></div>
+                        </div>
+
+                        <ul class="instructions-list">
+                            <li>You will be presented with 50 multiple choice questions</li>
+                            <li>Points awarded: Easy (1 pt), Medium (2 pts), Hard (3 pts)</li>
+                            <li>There is no negative marking for incorrect answers</li>
+                            <li>You can use keyboard shortcuts (A, B, C, D) to select answers</li>
+                            <li>Once you proceed to the next question, you cannot go back</li>
+                            <li>Questions cover both fundamental concepts and cybersecurity aspects</li>
+                        </ul>
+
+                        <div class="difficulty-selector">
+                            <h4 class="difficulty-title">Select Difficulty Level</h4>
+                            <div class="difficulty-controls">
+                                <div class="difficulty-options">
+                                    <label class="difficulty-option" data-value="0">
+                                        <input type="radio" name="difficulty" value="0">
+                                        <span class="option-content">
+                                            <span class="option-label">Easy</span>
+                                            <span class="option-points">1 point</span>
+                                        </span>
+                                        <div class="option-indicator"></div>
+                                    </label>
+                                    
+                                    <label class="difficulty-option" data-value="1">
+                                        <input type="radio" name="difficulty" value="1">
+                                        <span class="option-content">
+                                            <span class="option-label">Medium</span>
+                                            <span class="option-points">2 points</span>
+                                        </span>
+                                        <div class="option-indicator"></div>
+                                    </label>
+                                    
+                                    <label class="difficulty-option" data-value="2">
+                                        <input type="radio" name="difficulty" value="2">
+                                        <span class="option-content">
+                                            <span class="option-label">Hard</span>
+                                            <span class="option-points">3 points</span>
+                                        </span>
+                                        <div class="option-indicator"></div>
+                                    </label>
+                                    
+                                    <label class="difficulty-option active" data-value="3">
+                                        <input type="radio" name="difficulty" value="3" checked>
+                                        <span class="option-content">
+                                            <span class="option-label">Mixed</span>
+                                            <span class="option-points">All levels</span>
+                                        </span>
+                                        <div class="option-indicator"></div>
+                                    </label>
+                                </div>
+                                <div class="difficulty-tooltip" id="difficultyTooltip">
+                                    <span id="tooltipText">Random blend of all difficulty levels for comprehensive practice</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="instructions-actions">
+                            <button class="btn btn--primary btn--large pulse-btn" id="startQuizBtn">
+                                <span class="btn-text">Start Quiz</span>
+                                <span class="btn-icon">🚀</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!-- Quiz Page Template -->
+    <template id="quizTemplate">
+        <section class="page" id="quizPage">
+            <div class="quiz-container">
+                <div class="quiz-header glass-card">
+                    <div class="quiz-progress-section">
+                        <div class="progress-ring-container">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring-bg" cx="30" cy="30" r="26" stroke-width="4"/>
+                                <circle class="progress-ring-fill" cx="30" cy="30" r="26" stroke-width="4" id="progressRingFill"/>
+                            </svg>
+                            <div class="progress-avatar">👤</div>
+                        </div>
+                        <div class="progress-info">
+                            <span class="progress-text" id="progressText">Question 1 of 50</span>
+                            <span class="subject-name" id="currentSubject"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="score-badge pulse-score" id="scoreBadge">
+                        <span class="score-label">Score</span>
+                        <span class="score-value" id="currentScore">0</span>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <div class="question-card glass-card slide-card" id="questionCard">
+                        <div class="question-header">
+                            <span class="question-number" id="questionNumber">Question 1</span>
+                            <span class="question-difficulty-badge" id="questionDifficultyBadge">Mixed</span>
+                        </div>
+                        
+                        <h3 class="question-text" id="questionText"></h3>
+                        
+                        <div class="options-grid" id="optionsContainer">
+                            <!-- Options will be dynamically inserted -->
+                        </div>
+
+                        <div class="question-actions">
+                            <button class="btn btn--outline" id="quitQuizBtn">
+                                <span class="btn-icon">❌</span>
+                                <span class="btn-text">Quit Quiz</span>
+                            </button>
+                            <button class="btn btn--primary disabled" id="nextQuestionBtn" disabled>
+                                <span class="btn-text">Next Question</span>
+                                <span class="btn-icon">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!-- Results Page Template -->
+    <template id="resultsTemplate">
+        <section class="page" id="resultsPage">
+            <div class="container">
+                <div class="results-panel glass-card">
+                    <div class="confetti-container" id="confettiContainer">
+                        <canvas id="confettiCanvas"></canvas>
+                    </div>
+                    
+                    <div class="results-header">
+                        <h2 class="results-title">Quiz Complete!</h2>
+                        <div class="score-display">
+                            <div class="final-score">
+                                <span class="score-number" id="finalScore">0</span>
+                                <span class="score-total">/ <span id="maxPossibleScore">150</span></span>
+                            </div>
+                            <div class="percentage-score" id="percentageScore">0%</div>
+                        </div>
+                    </div>
+
+                    <div class="results-chart-container">
+                        <div class="chart-wrapper" style="position: relative; height: 300px;">
+                            <canvas id="resultsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="results-breakdown">
+                        <div class="breakdown-grid">
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">Subject</span>
+                                <span class="breakdown-value" id="resultSubject">-</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">Difficulty</span>
+                                <span class="breakdown-value" id="resultDifficulty">-</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">Correct</span>
+                                <span class="breakdown-value correct-color" id="correctAnswers">0</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">Incorrect</span>
+                                <span class="breakdown-value incorrect-color" id="incorrectAnswers">0</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">Accuracy</span>
+                                <span class="breakdown-value" id="accuracyScore">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results-actions">
+                        <button class="btn btn--primary" id="reviewAnswersBtn">
+                            <span class="btn-icon">📝</span>
+                            <span class="btn-text">Review Answers</span>
+                        </button>
+                        <button class="btn btn--secondary" id="retakeQuizBtn">
+                            <span class="btn-icon">🔄</span>
+                            <span class="btn-text">Retake Quiz</span>
+                        </button>
+                        <button class="btn btn--outline" id="backToSubjectsFromResultsBtn">
+                            <span class="btn-icon">🏠</span>
+                            <span class="btn-text">Try Another Subject</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!-- Review Page Template -->
+    <template id="reviewTemplate">
+        <section class="page" id="reviewPage">
+            <div class="container">
+                <div class="review-header glass-card">
+                    <button class="back-btn" id="backToResultsBtn" aria-label="Back to results">
+                        <span class="back-arrow">←</span>
+                    </button>
+                    <h2 class="page-title">Answer Review</h2>
+                </div>
+                
+                <div class="review-content" id="reviewContent">
+                    <!-- Review items will be dynamically inserted -->
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
