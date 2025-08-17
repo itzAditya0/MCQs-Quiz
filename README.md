@@ -1,7 +1,7 @@
 # Quiz Master v2
 
 Quiz Master v2 is a simple web-based quiz application. It allows users to answer questions and get instant feedback. The project is built using HTML, CSS, and JavaScript.
-
+Access the project at: "https://mcqs-quiz-one.vercel.app/"
 ## Features
 - Interactive quiz interface
 - Instant feedback on answers
